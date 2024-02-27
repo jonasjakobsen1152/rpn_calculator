@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.orange),
-              minimumSize: MaterialStateProperty.all(const Size(100, 100)),
+              minimumSize: MaterialStateProperty.all(const Size(150, 150)),
             ),
           )),
       home: Scaffold(
@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            margin: const EdgeInsets.all(200),
+          child: Align(
+            alignment: Alignment.center,
             child: buildColumn(),
           ),
         ),
@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
 
   Column buildColumn() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(4.0),
