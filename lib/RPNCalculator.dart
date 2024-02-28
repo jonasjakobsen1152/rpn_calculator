@@ -1,6 +1,9 @@
 class RPNCalculator {
   final List<double> _stack = [];
 
+  void clear() {
+    _stack.clear();
+  }
   void push(double value) {
     _stack.add(value);
   }
@@ -53,5 +56,9 @@ class RPNCalculator {
       throw Exception('No result available');
     }
     return _stack.last;
+  }
+
+  String stackToString() {
+    return _stack.join(' ');
   }
 }
