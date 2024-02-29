@@ -7,7 +7,7 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   // Change name of test to something that makes sense for your app
   testWidgets('Test MyApp', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp());
 
     // TODO write your test code here
   });

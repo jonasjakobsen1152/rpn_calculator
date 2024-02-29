@@ -1,64 +1,60 @@
+import 'dart:collection';
+
 class RPNCalculator {
   final List<double> _stack = [];
+  String _currentInput = '';
 
-  void clear() {
-    _stack.clear();
-  }
+  UnmodifiableListView<double> get stack => UnmodifiableListView(_stack);
+
   void push(double value) {
     _stack.add(value);
   }
 
-  double pop() {
-    return _stack.removeLast();
+  void performOperation(String operation) {
+    if (_stack.length < 2) return; // Insufficient operands for binary operation
+    final operand2 = _stack.removeLast();
+    final operand1 = _stack.removeLast();
+    double result;
+    switch (operation) {
+      case '+':
+        result = operand1 + operand2;
+        break;
+      case '-':
+        result = operand1 - operand2;
+        break;
+      case '*':
+        result = operand1 * operand2;
+        break;
+      case '/':
+        result = operand1 / operand2;
+        break;
+      default:
+        return; // Invalid operation
+    }
+    _stack.add(result);
   }
 
-  void add() {
-    if (_stack.length < 2) {
-      throw Exception('Not enough operands');
-    }
-    double operand2 = pop();
-    double operand1 = pop();
-    push(operand1 + operand2);
+  void clear() {
+    _stack.clear();
+    _currentInput = '';
   }
 
-  void subtract() {
-    if (_stack.length < 2) {
-      throw Exception('Not enough operands');
-    }
-    double operand2 = pop();
-    double operand1 = pop();
-    push(operand1 - operand2);
+  void inputNumber(String number) {
+    _currentInput += number;
   }
 
-  void multiply() {
-    if (_stack.length < 2) {
-      throw Exception('Not enough operands');
+  void enter() {
+    if (_currentInput.isNotEmpty) {
+      _stack.add(double.parse(_currentInput));
+      _currentInput = '';
     }
-    double operand2 = pop();
-    double operand1 = pop();
-    push(operand1 * operand2);
-  }
-
-  void divide() {
-    if (_stack.length < 2) {
-      throw Exception('Not enough operands');
-    }
-    double operand2 = pop();
-    if (operand2 == 0) {
-      throw Exception('Cannot divide by zero');
-    }
-    double operand1 = pop();
-    push(operand1 / operand2);
-  }
-
-  double result() {
-    if (_stack.isEmpty) {
-      throw Exception('No result available');
-    }
-    return _stack.last;
   }
 
   String stackToString() {
-    return _stack.join(' ');
+    return _stack.map((value) => value.toString()).join(' ');
+  }
+
+  String getCurrentInput() {
+    return _currentInput;
   }
 }

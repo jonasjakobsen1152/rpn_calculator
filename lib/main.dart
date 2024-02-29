@@ -19,23 +19,21 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primarySwatch: Colors.orange,
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.orange),
-              minimumSize: MaterialStateProperty.all(const Size(150, 150)),
-            ),
-          )),
+        primarySwatch: Colors.orange,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.orange),
+            minimumSize: MaterialStateProperty.all(const Size(150, 150)),
+          ),
+        ),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Awesome Calculator'),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Align(
-            alignment: Alignment.center,
-            child: buildColumn(),
-          ),
+        body: Align(
+          alignment: Alignment.center,
+          child: buildColumn(),
         ),
       ),
     );
@@ -46,8 +44,12 @@ class _MyAppState extends State<MyApp> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Text(
-          '${calculator.stackToString()}',
-          style: TextStyle(fontSize: 24),
+          calculator.stackToString(),
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          calculator.getCurrentInput(),
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
         Padding(
           padding: const EdgeInsets.all(4.0),
@@ -88,7 +90,7 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               buildExpandedButton('C'),
               buildExpandedButton('0'),
-              buildExpandedButton('='),
+              buildExpandedButton('enter'),
               buildExpandedButton('/'),
             ],
           ),
@@ -102,24 +104,21 @@ class _MyAppState extends State<MyApp> {
       child: ElevatedButton(
         onPressed: () {
           setState(() {
-            if (label == '+') {
-              calculator.add();
-            } else if (label == '-') {
-              calculator.subtract();
-            } else if (label == '*') {
-              calculator.multiply();
-            } else if (label == '/') {
-              calculator.divide();
-            } else if (label == 'C') {
+            if (label == 'C') {
               calculator.clear();
-            } else if (label == '=') {
-              // Do nothing for now
+            } else if (label == 'enter') {
+              calculator.enter();
+            } else if ('+-*/'.contains(label)) {
+              calculator.performOperation(label);
             } else {
-              calculator.push(double.parse(label));
+              calculator.inputNumber(label);
             }
           });
         },
-        child: Text(label),
+        child: Text(
+          label,
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
       ),
     );
   }
