@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.orange),
-            minimumSize: MaterialStateProperty.all(const Size(150, 150)),
+            minimumSize: MaterialStateProperty.all(const Size(50, 50)),
           ),
         ),
       ),
