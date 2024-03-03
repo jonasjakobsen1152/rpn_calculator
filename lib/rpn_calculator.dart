@@ -11,7 +11,7 @@ class RPNCalculator {
   }
 
   void performOperation(String operation) {
-    if (_stack.length < 2) return; // Insufficient operands for binary operation
+    if (_stack.length < 2) return;
     final operand2 = _stack.removeLast();
     final operand1 = _stack.removeLast();
     double result;
@@ -29,7 +29,7 @@ class RPNCalculator {
         result = operand1 / operand2;
         break;
       default:
-        return; // Invalid operation
+        return;
     }
     _stack.add(result);
   }
