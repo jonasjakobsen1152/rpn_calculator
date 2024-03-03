@@ -20,23 +20,23 @@ void main() {
     var buttonPlusFinder = find.widgetWithText(ElevatedButton, '+');
     var buttonEnterFinder = find.widgetWithText(ElevatedButton, 'enter');
 
-    // Tap '2'
+    // 2
     await tester.tap(button2Finder);
     await tester.pumpAndSettle();
 
-    // Tap 'enter'
+    // enter
     await tester.tap(buttonEnterFinder);
     await tester.pumpAndSettle();
 
-    // Tap '3'
+    // 3
     await tester.tap(button3Finder);
     await tester.pumpAndSettle();
 
-    // Tap 'enter'
+    // enter
     await tester.tap(buttonEnterFinder);
     await tester.pumpAndSettle();
 
-    // Tap '+'
+    //  +
     await tester.tap(buttonPlusFinder);
     await tester.pumpAndSettle();
 
@@ -47,7 +47,7 @@ void main() {
     // Find the result text
     var resultFinder = find.text('5');
 
-    // Verify the result is '5'
+    // The result should be 5
     expect(resultFinder, findsOneWidget);
   });
 }
