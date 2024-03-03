@@ -44,7 +44,7 @@ void main() {
     await tester.tap(buttonEnterFinder);
     await tester.pumpAndSettle();
 
-    // Find the result text
+    // Find the result
     var resultFinder = find.text('5');
 
     // The result should be 5
